@@ -13,6 +13,17 @@ public class SimpleLinearMotion : Motion
 
     public override MotionState GetState()
     {
+        UpdateState();
         return state;
+    }
+
+    public void UpdateState()
+    {
+
+    }
+
+    public override void SetState(MotionState p_state)
+    {
+        state = p_state;
     }
 }

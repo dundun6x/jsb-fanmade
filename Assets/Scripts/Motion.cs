@@ -13,6 +13,7 @@ public abstract class Motion
     protected MotionState state;
 
     public abstract void Act();
+    public abstract void SetState(MotionState p_state);
     public abstract MotionState GetState();
 
     public void SetDataBlock(MotionDataBlock p_dataBlock)
