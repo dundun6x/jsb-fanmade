@@ -4,7 +4,5 @@ using UnityEngine;
 
 public class MotionController : MonoBehaviour
 {
-    private MotionDataBlock dataBlock;
-
-    
+    private ArrayList<MotionSequence> sequences;
 }
