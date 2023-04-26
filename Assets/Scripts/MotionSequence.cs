@@ -7,21 +7,18 @@ public class MotionSequence
     private Queue<Motion> motions;
     private Motion curMotion = null;
     private MotionDataBlock dataBlock;
+    private bool started;
 
-    private Timer timer;
-    private float timePoint = 0;
-
-    public void Activate()
+    public void Start()
     {
-        if (motions.Count == 0) return;
-        curMotion = motions.Dequeue();
-        timer.Start();
+        started = true;
     }
 
     private void Update()
     {
-        if (curMotion == null) return;
+        if (!started) return;
+        if (curMotion == null)
         curMotion.Act();
-        if (curMotion.GetState() == MotionState.Stopped) ;
+        if (curMotion.GetState() == MotionState.Stopped) curMotion = null;
     }
 }
