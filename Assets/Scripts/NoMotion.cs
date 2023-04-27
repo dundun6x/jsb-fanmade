@@ -10,7 +10,7 @@ public class NoMotion : Motion
 
     public NoMotion(float p_duration)
     {
-        state = MotionState.Queuing;
+        state = MotionState.Idle;
         duration = p_duration;
     }
 
@@ -18,28 +18,18 @@ public class NoMotion : Motion
     
     public override MotionState GetState()
     {
-        UpdateState();
+        // Update state
+        if (timer.Time() > duration) state = MotionState.Stopped;
         return state;
     }
 
-    public void UpdateState()
-    {
-        if (timer.Time() > duration) state = MotionState.Stopped;
-    }
-
-    public override void SetState(MotionState p_state)
+    public override void FollowState(MotionState p_state)
     {
         switch (p_state)
         {
             case MotionState.Acting:
-                Start();
+                timer.Start();
                 break;
         }
-        state = p_state;
-    }
-
-    private void Start()
-    {
-        timer.Start();
     }
 }

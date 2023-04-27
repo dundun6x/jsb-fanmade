@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum MotionState
 {
-    Queuing, Acting, Stopped
+    Idle, Acting, Stopped
 }
 
 public abstract class Motion
@@ -13,11 +13,8 @@ public abstract class Motion
     protected MotionState state;
 
     public abstract void Act();
-    public abstract void SetState(MotionState p_state);
-    public abstract MotionState GetState();
-
-    public void SetDataBlock(MotionDataBlock p_dataBlock)
-    {
-        dataBlock = p_dataBlock;
-    }
+    public virtual MotionState GetState() { return state; }
+    public virtual void SetState(MotionState p_state) { state = p_state; }
+    public abstract void FollowState(MotionState p_state);
+    public void SetDataBlock(MotionDataBlock p_dataBlock) { dataBlock = p_dataBlock; }
 }

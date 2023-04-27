@@ -4,5 +4,23 @@ using UnityEngine;
 
 public class MotionController : MonoBehaviour
 {
-    private List<MotionSequence> sequences;
+    private LinkedList<MotionSequence> sequences;
+
+    public void AddSequence(MotionSequence sequence)
+    {
+        sequences.AddLast(sequence);
+    }
+
+    private void Update()
+    {
+        foreach (var seq in sequences)
+        {
+            if (seq.GetState() == MotionSequenceState.Stopped)
+            {
+                sequences.Remove(seq);
+                return;
+            }
+            seq.Act();
+        }
+    }
 }

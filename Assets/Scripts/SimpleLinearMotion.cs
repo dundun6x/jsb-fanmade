@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SimpleLinearMotion : Motion
 {
-    public float moveSpeed;
+    public Vector2 motionVector;
 
     public override void Act()
     {
@@ -22,8 +22,8 @@ public class SimpleLinearMotion : Motion
 
     }
 
-    public override void SetState(MotionState p_state)
+    public override void FollowState(MotionState p_state)
     {
-        state = p_state;
+        
     }
 }
