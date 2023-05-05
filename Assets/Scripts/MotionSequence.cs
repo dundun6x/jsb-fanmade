@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum MotionSequenceState
 {
-    Prepared, Acting, Stopped
+    Idle, Prepared, Acting, Stopped
 }
 
 public class MotionSequence
@@ -49,14 +49,9 @@ public class MotionSequence
     {
         switch (p_state)
         {
-            case MotionSequenceState.Prepared:
-                Prepare();
+            case MotionSequenceState.Acting:
+                dataBlock = new MotionDataBlock();
                 break;
         }
-    }
-
-    private void Prepare()
-    {
-        dataBlock = new MotionDataBlock();
     }
 }
