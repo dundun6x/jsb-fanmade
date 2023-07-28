@@ -38,9 +38,9 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))    arrow.y += 1;
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (Time.time - lastDashTime < dashDuration + dashInterval) goto ooi;
+            if (Time.time - lastDashTime < dashDuration + dashInterval) goto jump_1;
             lastDashTime = Time.time;
-        } ooi:
+        } jump_1:
         
         Vector2 motionInFrame = Vector2.zero;
         float curRotateRate = rotateRate;

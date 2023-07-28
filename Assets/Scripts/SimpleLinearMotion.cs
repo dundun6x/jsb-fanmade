@@ -4,25 +4,22 @@ using UnityEngine;
 
 public class SimpleLinearMotion : Motion
 {
-    public Vector2 motionVector;
+    private float duration;
+    private Timer timer;
+    private Vector2 motionVector;
 
-    public override void Act()
+    public override Vector3 GetDisplacement()
     {
-        
+        return timer.Time() * motionVector;
     }
 
     public override MotionState GetState()
     {
-        UpdateState();
+        if (timer.Time() > duration) SetState(MotionState.Stopped);
         return state;
     }
 
-    public void UpdateState()
-    {
-
-    }
-
-    public override void FollowState(MotionState p_state)
+    public override void SetState(MotionState state)
     {
         
     }

@@ -11,12 +11,11 @@ public class MotionSequence
 {
     private Queue<Motion> motions;
     private Motion curMotion = null;
-    private MotionDataBlock dataBlock;
     private MotionSequenceState state;
 
     public void EnqueueMotion(Motion motion) { motions.Enqueue(motion); }
-    public MotionSequenceState GetState() { return state; }
-    public void SetState(MotionSequenceState p_state) { state = p_state; }
+    public MotionSequenceState GetState() => state;
+    public void SetState(MotionSequenceState state) { this.state = state; }
     
     public void Act()
     {
@@ -30,27 +29,27 @@ public class MotionSequence
             curMotion = null;
             return;
         }
-        curMotion.Act();
+        // curMotion.Act();
     }
 
     private void DequeueMotion()
     {
         curMotion = motions.Dequeue();
-        curMotion.SetDataBlock(dataBlock);
+        // curMotion.SetDataBlock(dataBlock);
         if (curMotion.GetState() == MotionState.Stopped)
         {
             curMotion = null;
             return;
         }
-        curMotion.FollowState(MotionState.Acting);
+        curMotion.SetState(MotionState.Acting);
     }
 
-    public void FollowState(MotionSequenceState p_state)
+    public void FollowState(MotionSequenceState state)
     {
-        switch (p_state)
+        switch (state)
         {
             case MotionSequenceState.Acting:
-                dataBlock = new MotionDataBlock();
+                // dataBlock = new MotionDataBlock();
                 break;
         }
     }

@@ -4,17 +4,14 @@ using UnityEngine;
 
 public enum MotionState
 {
-    Idle, Acting, Stopped
+    Idle, Acting, Paused, Stopped
 }
 
 public abstract class Motion
 {
-    protected MotionDataBlock dataBlock;
-    protected MotionState state;
+    protected MotionState state = MotionState.Idle;
 
-    public abstract void Act();
-    public virtual MotionState GetState() { return state; }
-    public virtual void SetState(MotionState p_state) { state = p_state; }
-    public abstract void FollowState(MotionState p_state);
-    public void SetDataBlock(MotionDataBlock p_dataBlock) { dataBlock = p_dataBlock; }
+    public abstract Vector3 GetDisplacement();
+    public abstract MotionState GetState();
+    public abstract void SetState(MotionState newState);
 }

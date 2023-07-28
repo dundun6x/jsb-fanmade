@@ -4,32 +4,30 @@ using UnityEngine;
 
 public class NoMotion : Motion
 {
-    public float duration;
-
+    private float duration;
     private Timer timer;
 
-    public NoMotion(float p_duration)
+    public NoMotion(float duration)
     {
-        state = MotionState.Idle;
-        duration = p_duration;
+        this.duration = duration;
     }
 
-    public override void Act(){}
+    public override Vector3 GetDisplacement() => Vector3.zero;
     
     public override MotionState GetState()
     {
-        // Update state
-        if (timer.Time() > duration) state = MotionState.Stopped;
+        if (timer.Time() > duration) SetState(MotionState.Stopped);
         return state;
     }
 
-    public override void FollowState(MotionState p_state)
+    public override void SetState(MotionState newState)
     {
-        switch (p_state)
+        switch (state)
         {
-            case MotionState.Acting:
-                timer.Start();
-                break;
+        case MotionState.Acting:
+            timer.Start();
+            break;
         }
+        this.state = newState;
     }
 }
