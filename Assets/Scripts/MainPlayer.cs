@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainPlayer
+namespace JSB
 {
-    private PlayerController controller;
+    public class MainPlayer
+    {
+        private PlayerController controller;
+    }
 }

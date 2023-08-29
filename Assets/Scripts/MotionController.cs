@@ -2,25 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MotionController : MonoBehaviour
+namespace JSB
 {
-    private LinkedList<MotionSequence> sequences;
-
-    public void AddSequence(MotionSequence sequence)
+    public class MotionController : AnimationController<Motion>
     {
-        sequences.AddLast(sequence);
-    }
-
-    private void Update()
-    {
-        foreach (var seq in sequences)
+        private void Update()
         {
-            if (seq.GetState() == MotionSequenceState.Stopped)
+            foreach (var motion in anims)
             {
-                sequences.Remove(seq);
-                return;
+                AnimationState state = motion.GetState();
+                if (state == AnimationState.Finished)
+                    Unregister(motion);
+                else if(state == AnimationState.Acting)
+                {
+                    transform.localPosition = motion.GetDisplacement();
+                    motion.UpdateState();
+                }
             }
-            seq.Act();
         }
     }
 }

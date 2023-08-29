@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
 
         transform.Translate(motionInFrame.x, motionInFrame.y, 0);
         Vector2 newScale = Vector2.Lerp(interTransform.localScale, targetScale, Time.deltaTime * scaleRate);
-        interTransform.localScale = new Vector3(newScale.x, newScale.y, 0);
+        interTransform.localScale = (Vector3)newScale;
 
         float arrowAngle = Vector2.SignedAngle(Vector2.left, arrow);
         interTransform.transform.localRotation = Quaternion.Lerp(interTransform.transform.localRotation, Quaternion.Euler(0, 0, arrowAngle), Time.deltaTime * curRotateRate);

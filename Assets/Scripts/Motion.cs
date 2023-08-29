@@ -2,16 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum MotionState
+namespace JSB
 {
-    Idle, Acting, Paused, Stopped
-}
+    public abstract class Motion : Animation
+    {
+        protected MotionController controller;
 
-public abstract class Motion
-{
-    protected MotionState state = MotionState.Idle;
+        public abstract Vector2 GetDisplacement();
 
-    public abstract Vector3 GetDisplacement();
-    public abstract MotionState GetState();
-    public abstract void SetState(MotionState newState);
+        public override void Register()
+        {
+            if (!go.TryGetComponent(out controller))
+            {
+                controller = go.AddComponent<MotionController>();
+            }
+            controller.Register(this);
+        }
+
+        public override bool IsRegistered()
+        {
+            if (controller == null) return false;
+            return controller.IsRegistered(this);
+        }
+    }
 }
