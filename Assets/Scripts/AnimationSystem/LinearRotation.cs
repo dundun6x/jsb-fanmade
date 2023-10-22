@@ -6,17 +6,17 @@ namespace JSB.AnimationSystem
 {
     public class LinearRotation : Rotation
     {
-        public float rate;
+        public float speed; // degrees per second
 
-        public LinearRotation(float duration, float rate)
+        public LinearRotation(float duration, float speed)
         {
-            this.rate = rate;
+            this.speed = speed;
             SetDuration(duration);
         }
 
         public override float GetAngle()
         {
-            return timer.Time() * rate;
+            return timer.Time() * speed;
         }
     }
 }

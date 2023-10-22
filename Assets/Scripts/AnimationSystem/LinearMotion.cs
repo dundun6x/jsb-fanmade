@@ -8,7 +8,7 @@ namespace JSB.AnimationSystem
 {
     public class LinearMotion : Motion
     {
-        public Vector2 speed;
+        public Vector2 speed; // units per second
 
         public LinearMotion(float duration, Vector2 speed)
         {

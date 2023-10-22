@@ -12,7 +12,7 @@ namespace JSB.AnimationSystem
         Unset, New, Again, Acting, Paused, Finished
     }
 
-    public enum BlendMode
+    public enum BlendType
     { 
         Base, Additive, Subtractive
     }
@@ -22,9 +22,9 @@ namespace JSB.AnimationSystem
         public float duration = 0;
         public int repetition = 1;
         public int residualRepetition = 0;
+        public State State { get => state; }
 
         protected State state = State.Unset;
-        public State State { get => state; }
         protected GameObject go;
         protected Timer timer;
 
@@ -79,7 +79,7 @@ namespace JSB.AnimationSystem
             if (timer.Time() > duration) SetState(State.Finished);
         }
 
-        // 初始参数设置函数 Functions for setting initial arguments
+        // 初始参数设置函数 Functions that set initial arguments
 
         public virtual Animation SetGameobject(GameObject go){ this.go = go; return this; }
         public virtual Animation SetDuration(float duration){ this.duration = duration; return this; }
@@ -89,14 +89,12 @@ namespace JSB.AnimationSystem
 
         public void Act()
         {
-            Register();
-            SetState(State.Acting);
+            Register(); SetState(State.Acting);
         }
 
         public void ActOn(GameObject go)
         {
-            SetGameobject(go);
-            Act();
+            SetGameobject(go); Act();
         }
 
         public virtual SequentialGroupAnimation Append(Animation next)
